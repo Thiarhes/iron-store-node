@@ -24,10 +24,10 @@ const userSchema = new Schema(
             { type: String, required: [true, `Insira uma senha!`] },
         adress:
         {
-            city: { type: String, required: true },
-            street: { type: String, required: true },
-            number: { type: Number, required: true },
-            zipcode: { type: Number, required: true },
+            city: { type: String, required: [true, `Digite o nome de sua cidade!`] },
+            street: { type: String, required: [true, `Digite o nome de sua rua!`] },
+            number: { type: Number, required: [true, `Digite o número de sua residência!`] },
+            zipcode: { type: Number, required: [true, `Digite o seu CEP`] },
             geolocation: { last: { type: Number }, long: { type: Number } },
         },
         phone:

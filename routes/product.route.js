@@ -31,7 +31,7 @@ router.post('/products', async (req, res) => {
     }
 });
 
-router.post('/products/:id', async (req, res) => {
+router.patch('/products/:id', async (req, res) => {
     const product = req.body;
     const { id } = req.params;
     try {
@@ -42,7 +42,7 @@ router.post('/products/:id', async (req, res) => {
     }
 })
 
-router.post('/products/:id', async (req, res) => {
+router.delete('/products/:id', async (req, res) => {
     const { id } = req.params;
     try {
         await productRepo.delete(id);
