@@ -11,7 +11,7 @@ class UserRepository {
         try {
             const existsUser = await this.user.findOne({ username });
             const existsEmail = await this.user.findOne({ email });
-            const regexPass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$/;
+            const regexPass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,20}$/;
             if (existsUser) {
                 throw new Error('Este usuário já está cadastrado');
             }
@@ -20,12 +20,14 @@ class UserRepository {
             } else if (!username || !email || !password) {
                 throw new Error('Todos os campos são obrigatórios');
             } else if (!password.match(regexPass)) {
-                throw new Error(`Sua senha deve conter no mínimo: 8 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 símbolo e 1 número (Levamos sua segurança a sério)`)
+                throw new Error(`Para sua segurança a senha deve conter no mínimo: 6 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 símbolo e 1 número`)
             }
             else {
                 const salt = bcrypt.genSaltSync(10);
                 const passwordHash = bcrypt.hashSync(password, salt);
-                const newUser = this.user.create({
+                // const newUser = new this.user({username, email, passwordHash});
+                // newUser.save();
+                 const newUser = await this.user.create({
                     username,
                     email,
                     passwordHash
