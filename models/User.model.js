@@ -7,8 +7,8 @@ const userSchema = new Schema(
             type: String,
             required: [true, `Insira seu nome de usuário`],
             trim: true,
-            match: [/^[a-zA-Z0-9_-]{8,15}$/, `Seu nome de usuário não pode conter símbolos, nem espaços e deve 
-            ter entre 8 e 15 caracteres!`],
+            match: [/^[a-zA-Z0-9_-]{6,12}$/, `Seu nome de usuário não pode conter símbolos, nem espaços e deve 
+            ter entre 6 e 12 caracteres!`],
             unique: true,
         },
         email:

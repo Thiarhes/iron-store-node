@@ -27,12 +27,16 @@ class UserRepository {
                 const passwordHash = bcrypt.hashSync(password, salt);
                 // const newUser = new this.user({username, email, passwordHash});
                 // newUser.save();
-                 const newUser = await this.user.create({
+                const newUser = await this.user.create({
                     username,
                     email,
                     passwordHash
                 });
-                return newUser;
+                return ({
+                    username: newUser.username,
+                    email: newUser.email,
+                    id: newUser.id,
+                });
             }
 
         } catch (error) {
@@ -40,7 +44,16 @@ class UserRepository {
         }
     }
 
-    update = async (id, user) => {
+    findUser = async (email) => {
+        try {
+            const user = await this.user.findOne({ email });
+            return user;
+        } catch (error) {
+            throw new Error();
+        }
+    }
+
+    updateUser = async (id, user) => {
         try {
             const updatedUser = await this.user.findByIdAndUpdate(id, user, { new: true });
             return updatedUser;
@@ -49,11 +62,11 @@ class UserRepository {
         }
     }
 
-    logout = async (id) => {
+    endSession = async (id) => {
         try {
-            
+
         } catch (error) {
-            
+
         }
     }
 
