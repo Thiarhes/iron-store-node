@@ -41,7 +41,7 @@ class ProductRepository {
         }
     }
 
-    delete = async (id) => {
+    deleteOne = async (id) => {
         try {
             await this.product.findByIdAndDelete(id)
         } catch (error) {

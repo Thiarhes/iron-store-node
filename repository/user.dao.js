@@ -62,17 +62,11 @@ class UserRepository {
         }
     }
 
-    endSession = async (id) => {
+
+    deleteUser = async (id) => {
         try {
-
-        } catch (error) {
-
-        }
-    }
-
-    delete = async (id) => {
-        try {
-            await this.user.findByIdAndDelete(id)
+         const deletedUser = await this.user.findByIdAndDelete(id)
+         return deletedUser;
         } catch (error) {
             throw new Error();
         }

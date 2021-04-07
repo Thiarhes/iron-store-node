@@ -45,8 +45,8 @@ router.patch('/products/:id', async (req, res) => {
 router.delete('/products/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        await productRepo.delete(id);
-        res.status(200).json({ message: `product successful deleted` });
+        await productRepo.deleteOne(id);
+        res.status(200).json({ message: `product successfully deleted` });
     } catch (error) {
         res.status(500).json({ message: `server side error while deleting a product` })
     }

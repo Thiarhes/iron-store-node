@@ -11,12 +11,12 @@ router.post('/signup', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: `Error while registering a new user` })
     }
-})
+});
 
 
 router.post('/login', async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { email, password } = req.body;
         const user = await userRepo.findUser(email);
 
         if (!user) {
@@ -31,12 +31,13 @@ router.post('/login', async (req, res) => {
 
         const payload = {
             id: user.id,
-            username: user.username,
+            user: user.username,
+            email: user.email,
         };
 
         const token = jwt.sign(
             payload,
-            'secret',
+            'secretpass',
             { expiresIn: '1 day' },
         );
 
@@ -46,6 +47,28 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: `Error while logging in an user` });
     }
-})
+});
+
+router.patch('/edit/:id', async (req, res) => {
+    const { username, email, password } = req.body;
+    const { id } = req.params;
+    try {
+        const user = await userRepo.updateUser(id, { username, email, password });
+        res.status(201).json(user);
+    } catch (error) {
+        res.status(500).json({ message: `Error while editing an user` });
+    }
+});
+
+router.delete('/delete/:id', async (req, res) => {
+    const { id } = req.params;
+    console.log(req.params)
+    try {
+        await userRepo.deleteUser(id);
+        res.status(200).json({ message: `User successfully deleted!` });
+    } catch (error) {
+        res.status(500).json({ message: `Error while deleting an user` });
+    }
+});
 
 module.exports = router;
