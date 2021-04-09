@@ -13,12 +13,20 @@ const app = express();
 // middlewares 
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const product = require('./routes/product.route');
 const auth = require('./routes/auth.routes');
 
-app.use('/', product);
+
 app.use('/', auth);
+
+// authentication's middleware
+
+const authMiddleware = require('./middlewares/auth.middleware');
+app.use(authMiddleware);
+
+app.use('/', product);
+
 
 module.exports = app;
