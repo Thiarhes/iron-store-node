@@ -5,44 +5,57 @@ class CartRepository {
         this.cart = CartModel;
     }
 
-
-    createCart = async (newCart) => {
+    getCart = async (userId) => {
         try {
-            const cart = await this.cart.create(newCart);
+            const cart = await this.cart.findOne({ userId })
+                .populate('products')
             return cart;
         } catch (error) {
             throw new Error();
         }
     }
 
+    addProd = async (productId, userId) => {
 
-    getCart = async (cartId, populate = false) => {
         try {
-            const cart = populate
-                ? await this.cart.findById(cartId)
-                    .populate('products')
-                    .populate('userId')
-                : await this.cart.findById(cartId);
+            const userCart = await this.cart.findOne({ userId: userId });
+            userCart.products.push(productId)
+            userCart.save();
+            return userCart;
+        } catch (error) {
+            throw new Error();
+        }
+    }
+
+    createCart = async (userId) => {
+        try {
+            const cart = new Cart({ userId, products: [] });
+            cart.save();
             return cart;
         } catch (error) {
             throw new Error();
         }
     }
 
-
-    updateCart = async (cartId, cart) => {
+    removeOne = async (userId, productId) => {
         try {
-            const updatedCart = await this.cart.findByIdAndUpdate(cartId, cart, { new: true });
-            return updatedCart;
+            const userCart = await this.cart.findOne({ userId });
+
+            const productIndex = userCart.products.findIndex((product) => productId == product);
+            userCart.products.splice(productIndex, 1);
+            userCart.save();
+            return userCart;
         } catch (error) {
             throw new Error();
         }
     }
 
-    deleteCart = async (cartId) => {
+    emptyCart = async (userId) => {
         try {
-            const deletedCart = await this.cart.findByIdAndDelete(cartId);
-            return deletedCart;
+            let cart = await this.getCart(userId);
+            cart.products = [];
+            let data = await cart.save();
+            return data;
         } catch (error) {
             throw new Error();
         }

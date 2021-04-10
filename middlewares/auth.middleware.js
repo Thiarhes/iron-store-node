@@ -4,7 +4,7 @@ module.exports = (req, res, next) => {
     const token = req.get('Authorization');
 
     if (!token) {
-        return res.status(401).json({ message: `Request out of token` });
+        return res.status(401).json({ message: `Request without token` });
     }
 
     const tokenWithoutBearer = token.split(' ')[1];

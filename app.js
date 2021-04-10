@@ -17,16 +17,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const product = require('./routes/product.route');
 const auth = require('./routes/auth.routes');
+const cart = require('./routes/cart.routes');
 
 
+app.use('/', product);
 app.use('/', auth);
+app.use('/cart', cart);
 
 // authentication's middleware
 
 const authMiddleware = require('./middlewares/auth.middleware');
 app.use(authMiddleware);
 
-app.use('/', product);
 
 
 module.exports = app;
