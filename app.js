@@ -10,6 +10,10 @@ require('./config/db.config');
 
 const app = express();
 
+app.use(cors(
+    { allowedHeaders: ['Content-Type', 'Authorization'] },
+  ));
+
 // middlewares 
 
 app.use(bodyParser.json());
