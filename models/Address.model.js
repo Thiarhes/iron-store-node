@@ -1,10 +1,10 @@
 const { Schema, model } = require('mongoose');
 
 const addressSchema = new Schema({
-    city: { type: String, required: [true, `Digite o nome de sua cidade!`] },
-    street: { type: String, required: [true, `Digite o nome de sua rua!`] },
-    number: { type: Number, required: [true, `Digite o número de sua residência!`] },
-    zipcode: { type: Number, required: [true, `Digite o seu CEP`] },
+    city: { type: String, required: [true, `Enter your city name!`] },
+    street: { type: String, required: [true, `Enter your street name!`] },
+    number: { type: Number, required: [true, `Enter the number of your house!`] },
+    zipcode: { type: Number, required: [true, `Enter your Zip code`] },
     geolocation: { last: { type: Number }, long: { type: Number } },
 });
 

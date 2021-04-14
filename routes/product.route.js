@@ -7,7 +7,7 @@ router.get('/products', async (req, res) => {
         const products = await productRepo.getAll();
         res.status(200).json(products);
     } catch (error) {
-        res.status(500).json({ message: `Error while getting products` })
+        res.status(500).json(error.message)
     }
 });
 
@@ -17,7 +17,7 @@ router.get('/products/:id', async (req, res) => {
         const oneProduct = await productRepo.getOne(id);
         res.status(200).json(oneProduct)
     } catch (error) {
-        res.status(500).json({ message: `Error while getting a single product` })
+        res.status(500).json(error.message)
     }
 });
 
@@ -27,7 +27,7 @@ router.post('/products', async (req, res) => {
         const newProduct = await productRepo.create(product);
         res.status(201).json(newProduct);
     } catch (error) {
-        res.status(500).json({ message: `Error while creating new product` });
+        res.status(500).json(error.message);
     }
 });
 
@@ -38,7 +38,7 @@ router.patch('/products/:id', async (req, res) => {
         const modifiedProduct = await productRepo.update(id, product);
         res.status(201).json(modifiedProduct);
     } catch (error) {
-        res.status(500).json({ message: `Error while updating a product` })
+        res.status(500).json(error.message)
     }
 })
 
@@ -48,7 +48,7 @@ router.delete('/products/:id', async (req, res) => {
         await productRepo.deleteOne(id);
         res.status(200).json({ message: `product successfully deleted` });
     } catch (error) {
-        res.status(500).json({ message: `server side error while deleting a product` })
+        res.status(500).json(error.message)
     }
 });
 

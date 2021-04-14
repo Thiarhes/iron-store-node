@@ -5,10 +5,9 @@ const userSchema = new Schema(
         username:
         {
             type: String,
-            required: [true, `Insira seu nome de usuário`],
+            required: [true, `Enter your username`],
             trim: true,
-            match: [/^[a-zA-Z0-9_-]{6,12}$/, `Seu nome de usuário não pode conter símbolos, nem espaços e deve 
-            ter entre 6 e 12 caracteres!`],
+            match: [/^[a-zA-Z0-9_-]{6,12}$/, `Your username cannot contain symbols or spaces, and must have between 6 and 12 characters!`],
             unique: true,
         },
         email:
@@ -16,16 +15,16 @@ const userSchema = new Schema(
             type: String,
             unique: true,
             trim: true,
-            required: [true, `Insira um email`],
+            required: [true, `Enter you email`],
             lowercase: true,
-            match: [/^\S+@\S+\.\S+$/, "Por favor insira um email válido"],
+            match: [/^\S+@\S+\.\S+$/, "Please, enter a valid email"],
         },
         passwordHash:
-            { type: String, required: [true, `Insira uma senha!`] },
+            { type: String, required: [true, `Enter a password!`] },
         address:
             { type: Schema.Types.ObjectId, ref: 'Address' },
         phone:
-            { type: Number },
+            { type: String },
     },
     {
         timestamps: true
