@@ -11,7 +11,7 @@ router.post('/signup', async (req, res) => {
         await cartRepo.createCart(user.id);
         res.status(201).json(user);
     } catch (error) {
-        res.status(500).json({ message: `Error while registering a new user` })
+        res.status(500).json(error.message)
     }
 });
 
@@ -22,13 +22,13 @@ router.post('/login', async (req, res) => {
         const user = await userRepo.findUser(email);
 
         if (!user) {
-            return res.status(400).json({ message: `Email não encontrado` });
+            return res.status(400).json(error.message);
         }
 
         const compareHash = bcrypt.compareSync(password, user.passwordHash);
 
         if (!compareHash) {
-            return res.status(400).json({ message: `Senha inválida` });
+            return res.status(400).json(error.message);
         }
 
         const payload = {
@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
 
 
     } catch (error) {
-        res.status(500).json({ message: `Error while logging in an user` });
+        res.status(500).json(error.message);
     }
 });
 
@@ -58,7 +58,7 @@ router.patch('/edit/:id', async (req, res) => {
         const user = await userRepo.updateUser(id, { username, email, password });
         res.status(201).json(user);
     } catch (error) {
-        res.status(500).json({ message: `Error while editing an user` });
+        res.status(500).json(error.message);
     }
 });
 
@@ -69,7 +69,7 @@ router.delete('/delete/:id', async (req, res) => {
         await userRepo.deleteUser(id);
         res.status(200).json({ message: `User successfully deleted!` });
     } catch (error) {
-        res.status(500).json({ message: `Error while deleting an user` });
+        res.status(500).json(error.message);
     }
 });
 

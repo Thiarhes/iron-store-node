@@ -51,7 +51,7 @@ router.post('/removeProd', async (req, res) => {
         await cartRepo.removeOne(userId, productId);
         res.status(200).json({ message: `Product successfuly removed from your cart` })
     } catch (error) {
-        res.status(500).json({ message: `Something went wrong` })
+        res.status(500).json({ message: `Something went wrong`, err: error })
     }
 });
 
