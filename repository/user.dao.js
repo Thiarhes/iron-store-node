@@ -43,7 +43,7 @@ class UserRepository {
             const user = await this.user.findOne({ email });
             return user;
         } catch (error) {
-            throw new Error();
+            throw new Error('User and email does not match with a registered user and email');
         }
     }
 
