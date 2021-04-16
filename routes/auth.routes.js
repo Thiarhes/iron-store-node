@@ -22,13 +22,13 @@ router.post('/login', async (req, res) => {
         const user = await userRepo.findUser(email);
 
         if (!user) {
-            return res.status(500).json(error.message);
+            return res.status(400).json(error.message);
         }
 
         const compareHash = bcrypt.compareSync(password, user.passwordHash);
 
         if (!compareHash) {
-            return res.status(500).json(error.message);
+            return res.status(400).json(error.message);
         }
 
         const payload = {
