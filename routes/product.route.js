@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const productRepo = require('../repository/product.dao');
 const router = Router();
+const fileUploader = require('../config/cloudinary.config');
 
 router.get('/products', async (req, res) => {
     try {
@@ -21,8 +22,9 @@ router.get('/products/:id', async (req, res) => {
     }
 });
 
-router.post('/products', async (req, res) => {
+router.post('/products', fileUploader.single('image'), async (req, res) => {
     const product = req.body;
+    product.image = req.file.path;
     try {
         const newProduct = await productRepo.create(product);
         res.status(201).json(newProduct);

@@ -24,6 +24,7 @@ class ProductRepository {
     }
 
     create = async (newProduct) => {
+        console.log(newProduct)
         try {
             const createdProduct = await this.product.create(newProduct)
             return createdProduct;
