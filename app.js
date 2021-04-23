@@ -23,13 +23,13 @@ const cart = require('./routes/cart.routes');
 
 
 app.use('/', auth);
-app.use('/', product);
 
 // authentication's middleware
 
 const authMiddleware = require('./middlewares/auth.middleware');
 app.use(authMiddleware);
 
+app.use('/', product);
 app.use('/cart', cart);
 
 
