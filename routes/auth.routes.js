@@ -20,34 +20,33 @@ router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await userRepo.findUser(email);
-
         if (!user) {
-            return res.status(400).json(error.message);
+            return res.status(400).json();
         }
-
+        
         const compareHash = bcrypt.compareSync(password, user.passwordHash);
-
+        
         if (!compareHash) {
-            return res.status(400).json(error.message);
+            return res.status(400).json();
         }
-
+        
         const payload = {
             id: user.id,
             user: user.username,
             email: user.email,
         };
-
+        
         const token = jwt.sign(
             payload,
             process.env.SECRET_JWT,
-            process.env.EXPIRATION_TOKEN,
-        );
-
+            {expiresIn:process.env.EXPIRATION_TOKEN},
+            );
+            
         res.status(200).json({ payload, token });
 
 
     } catch (error) {
-        res.status(500).json(error.message);
+        res.status(500).json(error);
     }
 });
 

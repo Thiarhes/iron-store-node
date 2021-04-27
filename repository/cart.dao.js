@@ -18,7 +18,7 @@ class CartRepository {
     addProd = async (productId, userId) => {
 
         try {
-            const userCart = await this.cart.findOne({ userId: userId });
+            const userCart = await this.cart.findOne({ userId });
             userCart.products.push(productId)
             userCart.save();
             return userCart;

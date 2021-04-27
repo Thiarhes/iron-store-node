@@ -27,14 +27,13 @@ router.post('/', async (req, res) => {
 });
 
 
-router.get('/:id', async (req, res) => {
+router.get('/:userId', async (req, res) => {
     try {
-
-        let cart = await cartRepo.getCart(req.params.id);
+        let cart = await cartRepo.getCart(req.params.userId);
         if (!cart) {
             return res.status(400).json({ message: `Cart not found` });
         }
-        res.status(200).json({ status: true, data: cart });
+        res.status(200).json(cart);
 
     } catch (error) {
         res.status(500).json({
