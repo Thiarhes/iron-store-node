@@ -63,7 +63,6 @@ router.patch('/edit/:id', async (req, res) => {
 
 router.delete('/delete/:id', async (req, res) => {
     const { id } = req.params;
-    console.log(req.params)
     try {
         await userRepo.deleteUser(id);
         res.status(200).json({ message: `User successfully deleted!` });

@@ -58,6 +58,18 @@ In the source folder, add an .env file with this variables:
 - All endpoints except /auth need to be accessed with token on Authorization header.
 - The common endpoints are the following:
 
-| METHOD | ENDPOINT               | PAYLOAD               | RESPONSE               | ACTION               |
-| ------ | ---------------------- | --------------------- | ---------------------- | -------------------- |
-|     
+| METHOD | ENDPOINT | PAYLOAD | RESPONSE | ACTION |  |
+| --- | --- | --- | --- | --- | --- |
+| POST | /signup | {"username":String, "email":String, "password":String} | - | Create new a new user with cart |  |
+| POST | /login | {"email":String, "password":String} | Auth token on Headers | Return JWT to private routes |  |
+| PATCH | /edit/:id | {"username":String, "email":String, "password":String} | {user} | Update a existing user |  |
+| DELETE | /delete/:id | {user:user_id} | - | Delete a user |  |
+| GET | /products | - | [products] | Get all products from DB |  |
+| GET | /products/:id | - | {product} | Get one product by id |  |
+| POST | /products | {"title":String, "price":Number, "description":String, "image":String, "category":String} | {product} | Create new product |  |
+| DELETE | /products/:id | - | - | Delete a product |  |
+| PATCH | /products/:id | {"title":String, "price":Number, "description":String, "image":String, "category":String} | {product} | Update a existing product |  |
+| POST | /cart | {user_id, product_id} | {cart} | Add product to cart |  |
+| GET | /cart/:userId | {user:user_id} | {cart} | Get one cart by user id |  |
+| POST | /cart/removeProd | {user_id, product_id} | {cart} | Remove one product from cart |  |
+| PUT | /cart | {user_id} | - | Remove all products from cart |  |
