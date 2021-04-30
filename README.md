@@ -10,9 +10,9 @@ IRON STORE Api is an express rest api used to manage e-commerce.
 
 ## Some Features
 
-- Create users
+- Create users (with shopping cart)
 - Create products and manage them
-- Create shopping cart
+- Manage shopping cart
 
 This api was created to manage all endpoints used on the third Ironhack's project remote bootcamp - **IRON STORE**.
 Create by **Thiarhes Gonçalves**
@@ -28,8 +28,8 @@ Create by **Thiarhes Gonçalves**
 
 ## Installation
 
-Clone this repo
-In the source folder, add an .env file with this variables:
+Clone this repo and 
+in the source folder, add an .env file with this variables:
 
 - MONGODB_URI      - for your atlas cluster or local mongodb.
 - SECRET_JWT       - for your jwt secret.
